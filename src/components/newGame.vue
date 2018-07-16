@@ -15,12 +15,13 @@
                 required></v-text-field>
             </v-flex>
             <v-flex>
-              <v-text-field
-                name="password"
-                label="Password"
-                id="password"
-                type="password"
-                required></v-text-field>
+              <v-select
+                :items="players"
+                label="Who Game"
+                name="who"
+                required
+                >
+              </v-select>
             </v-flex>
             <v-flex>
               <v-text-field
@@ -41,6 +42,14 @@
     </v-slide-y-transition>
   </v-container>
 </template>
+
+<script>
+  export default {
+    data: () => ({
+      players: ['Nathan', 'Natalie']
+    })
+  }
+</script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
