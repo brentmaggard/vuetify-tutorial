@@ -1,10 +1,11 @@
 <template>
-  <v-container fluid>
+  <v-container fluid
+        grid-list-lg>
     <v-slide-y-transition mode="out-in">
       <v-layout row wrap>
 boom
-        <v-flex grid-list-lg>
-          <v-card xs12 v-for="(goal, idx) in goals" :key="idx">
+        <v-flex xs12 v-for="(goal, idx) in goals" :key="idx">
+          <v-card>
             <v-card-title primary-title >
               <div>
                 <h3 class="headline mb-0"><strong>Game On: </strong>{{ goal.gameDate }} </h3>
@@ -29,7 +30,7 @@ boom
 <script>
 import { db } from '../main'
 export default {
-  name: 'HomeView',
+  name: 'Home',
   firestore () {
     return {
       goals: db.collection('goals').orderBy('gameDate')
