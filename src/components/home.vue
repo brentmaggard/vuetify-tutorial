@@ -1,47 +1,27 @@
 <template>
-  <v-container fluid
-        grid-list-lg>
+  <v-container fluid>
     <v-slide-y-transition mode="out-in">
-      <v-layout row wrap>
-boom
-        <v-flex xs12 v-for="(goal, idx) in goals" :key="idx">
-          <v-card>
-            <v-card-title primary-title >
-              <div>
-                <h3 class="headline mb-0"><strong>Game On: </strong>{{ goal.gameDate }} </h3>
-                <div>
-                  <p><strong>Shots Blocked: </strong>{{goal.shotsBlocked}} -- <strong>Shots Missed: </strong>{{goal.shotsMissed}}</p>
-                  <p><strong>Play Time: </strong>{{ goal.playTime}}</p>
-                  <p><strong>Score: </strong>{{goal.scoreUs}} <strong>to </strong>{{goal.scoreThem}}</p>
-                </div>
-              </div>
-            </v-card-title>
-            <v-card-actions>
-              <v-btn flat color="orange">Details</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-flex>
+      <v-layout row align-center>
+        <v-flex xs12 sm6 offset-sm3 mt-3>
+        <v-btn block color="success">
+          <router-link tag="button" class="myClass" id="button" to="/newgame">New Game <v-icon right>add_circle_outline</v-icon></router-link>
+        </v-btn>
+        <v-btn block color="success">
+          <router-link tag="button" class="myClass" id="button" to="/stats">Stats <v-icon right>list</v-icon></router-link>
+        </v-btn>
 
+      </v-flex>
       </v-layout>
     </v-slide-y-transition>
   </v-container>
 </template>
 
 <script>
-import { db } from '../main'
-export default {
-  name: 'Home',
-  firestore () {
-    return {
-      goals: db.collection('goals').orderBy('gameDate')
-    }
-  },
-  data () {
-    return {
-      goals: []
-    }
+  export default {
+    data: () => ({
+      players: ['Nathan', 'Natalie']
+    })
   }
-}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

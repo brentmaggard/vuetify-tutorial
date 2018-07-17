@@ -59,6 +59,11 @@ export default {
       },
       {
         icon: 'bubble_chart',
+        title: 'Stats',
+        path: '/stats'
+      },
+      {
+        icon: 'bubble_chart',
         title: 'Game In-Progress',
         path: '/game-inprogress'
       }],
