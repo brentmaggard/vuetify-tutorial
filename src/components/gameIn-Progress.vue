@@ -24,17 +24,33 @@ import { db } from '../main'
 
 export default {
   name: 'gameInProgress',
-  firestore () {
-    return {
-      goals: db.collection('goals').where('uuid', '==', this.$route.params.id)
-    }
-  },
   data () {
     return {
-      goals: []
+      goals: [],
+      gameDate: null
     }
   },
+  beforeRouteEnter (to, from, next) {
+    db.collection('goals').where('uuid', '==', to.params.id).get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        next(vm => {
+          vm.gamDate = doc.data().firstname
+        })
+      })
+    })
+  },
+  watch: {
+    '$route': 'fetchData'
+  },
   methods: {
+    fetchData () {
+      db.collection('goals').where('uuid', '==', this.$route.params.id).get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          console.log(doc.id, ' => ', doc.data())
+          this.gameDate = doc.data().gameDate
+        })
+      })
+    },
     addToMissed () {
       this.missedGoals += 1
     },
