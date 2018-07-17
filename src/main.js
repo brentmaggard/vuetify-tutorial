@@ -6,6 +6,10 @@ import router from './router'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 
+import VueFire from 'vuefire'
+import firebase from 'firebase/app'
+import 'firebase/firestore'
+
 Vue.use(Vuetify)
 
 Vue.config.productionTip = false
@@ -17,3 +21,12 @@ new Vue({
   components: { App },
   template: '<App/>'
 })
+
+Vue.use(VueFire)
+
+firebase.initializeApp({
+  projectId: 'goal-tracking-4664b',
+  databaseURL: 'https://goal-tracking-4664b.firebaseio.com'
+})
+
+export const db = firebase.firestore()
