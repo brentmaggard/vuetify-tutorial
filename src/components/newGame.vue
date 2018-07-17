@@ -4,7 +4,7 @@
       <v-layout row align-center>
         <v-flex xs12 sm6 offset-sm3 mt-3>
         <h1>Create a New Game</h1>
-        <form @submit="addGame(gameDate, who)">
+        <form @submit.prevent="addGame(gameDate, who)">
           <v-layout column>
             <v-flex>
               <v-menu
@@ -53,6 +53,7 @@
 
 <script>
   import { db } from '../main'
+
   export default {
     data: () => ({
       players: ['Nathan', 'Natalie'],
@@ -75,18 +76,15 @@
     },
 
     methods: {
-      addGame (gameDate, who) {
-        console.log(gameDate)
-        console.log(who)
+      addGame: function (gameDate, who) {
         const createdAt = new Date()
         db.collection('goals').add({ gameDate, who, createdAt })
-
-          .then(function (docRef) {
+          .then((docRef) => {
             console.log('Document written with ID: ', docRef.id)
-            this.$router.push('/gameIn-Progress/' + docRef.id)
+            const docID = docRef.id
+            this.$router.push({name: 'Game In-Progress', params: { docID }})
           })
-
-          .catch(function (error) {
+          .catch((error) => {
             console.error('Error adding document: ', error)
           })
       },

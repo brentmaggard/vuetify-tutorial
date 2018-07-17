@@ -20,7 +20,7 @@ export default new Router({
       component: Stats
     },
     {
-      path: '/game-inprogress',
+      path: '/game-inprogress/:id',
       name: 'Game In-Progress',
       component: gameInProgress
     },
