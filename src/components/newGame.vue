@@ -82,7 +82,7 @@
           .then((docRef) => {
             console.log('Document written with ID: ', docRef.id)
             const docID = docRef.id
-            this.$router.push({name: 'Game In-Progress', params: { docID }})
+            this.$router.push({name: 'Game In-Progress', params: { id: docID }})
           })
           .catch((error) => {
             console.error('Error adding document: ', error)
