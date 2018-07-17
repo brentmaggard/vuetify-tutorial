@@ -78,11 +78,18 @@
     methods: {
       addGame: function (gameDate, who) {
         const createdAt = new Date()
-        db.collection('goals').add({ gameDate, who, createdAt })
+        const uuid = this.generateUUID()
+        const gameYear = ''
+        const playTime = ''
+        const scoreThem = 0
+        const scoreUs = 0
+        const shotsBlocked = 0
+        const shotsMissed = 0
+        db.collection('goals').add({ gameDate, who, createdAt, uuid, gameYear, playTime, scoreThem, scoreUs, shotsBlocked, shotsMissed })
           .then((docRef) => {
             console.log('Document written with ID: ', docRef.id)
-            const docID = docRef.id
-            this.$router.push({name: 'Game In-Progress', params: { id: docID }})
+            // const docID = docRef.id
+            this.$router.push({name: 'Game In-Progress', params: { id: uuid }})
           })
           .catch((error) => {
             console.error('Error adding document: ', error)
@@ -100,6 +107,15 @@
 
         const [month, day, year] = date.split('/')
         return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+      },
+      generateUUID () {
+        let d = new Date().getTime()
+        let uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+          let r = (d + Math.random() * 16) % 16 | 0
+          d = Math.floor(d / 16)
+          return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16)
+        })
+        return uuid
       }
     }
   }

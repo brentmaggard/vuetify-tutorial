@@ -3,7 +3,7 @@
     <v-slide-y-transition mode="out-in">
       <v-layout row wrap>
         <v-flex xs12 sm6 offset-sm3 mt-3>
-          <h1>Game Date: [date of game]</h1>
+          <h1>Game Date: {{goals.gameDate}}</h1>
         </v-flex>
         <v-flex xs6>
           <p>{{blockedGoals}}</p>
@@ -20,12 +20,18 @@
 
 
 <script>
+import { db } from '../main'
+
 export default {
   name: 'gameInProgress',
+  firestore () {
+    return {
+      goals: db.collection('goals').where('uuid', '==', this.$route.params.id)
+    }
+  },
   data () {
     return {
-      missedGoals: 0,
-      blockedGoals: 0
+      goals: []
     }
   },
   methods: {
